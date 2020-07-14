@@ -251,3 +251,117 @@
 //	}
 //	return 0;
 //}
+
+
+////P107
+//#include<cstdio>
+//const int maxn = 100010;
+//bool hashTable[maxn] = { false };
+//
+//int main() {
+//	int n, m, x;
+//	scanf("%d%d", &n, &m);
+//	for (int i = 0; i < n; i++) {
+//		scanf("%d", &x);
+//		hashTable[x] = true;	//数字x出现过
+//	}
+//
+//	for (int i = 0; i < m; i++) {
+//		scanf("%d", &x);
+//		if (hashTable[x] == true) {
+//			printf("YES\n");
+//		}
+//		else {
+//			printf("NO\n");
+//		}
+//	}
+//
+//	return 0;
+//}
+
+
+////P107
+//#include<cstdio>
+//const int maxn = 100010;
+//int hashTable[maxn] = { 0 };
+//
+//int main() {
+//	int n, m, x;
+//	scanf("%d%d", &n, &m);
+//	for (int i = 0; i < n; i++) {
+//		scanf("%d", &x);
+//		hashTable[x]++;
+//	}
+//
+//	for (int i = 0; i < m; i++) {
+//		scanf("%d", &x);
+//		printf("%d\n", hashTable[x]);
+//	}
+//
+//	return 0;
+//}
+
+
+////P112
+//#include<cstdio>
+//int F(int n) {
+//	if (n == 0) return 1;	//当到达递归边界F(0)时,返回F(0)==1
+//	else return F(n - 1) * n;	//没有到达递归边界时,使用递归式递归下去
+//}
+//
+//int main() {
+//	int n;
+//	scanf("%d", &n);
+//	printf("%d\n", F(n));
+//
+//	return 0;
+//}
+
+
+////P113
+//#include<cstdio>
+//int F(int n) {
+//	if (n == 0 || n == 1) return 1;
+//	else return F(n - 1) + F(n - 2);
+//}
+//
+//int main() {
+//	int n;
+//	scanf("%d", &n);
+//	printf("%d\n", F(n));
+//
+//	return 0;
+//}
+
+
+//P115
+#include<cstdio>
+const int maxn = 11;
+//P为当前排列,hashTable记录整数x是否已经在P中
+int n, P[maxn], hashTable[maxn] = { false };
+//当前处理排列的第index号位
+void generateP(int index) {
+	if (index == n + 1) {
+		for (int i = 1; i <= n; i++) {
+			printf("%d", P[i]);
+		}
+		printf("\n");
+		return;
+	}
+
+	for (int x = 1; x <= n; x++) {
+		if (hashTable[x] == false) {
+			P[index] = x;
+			hashTable[x] = true;
+			generateP(index + 1);
+			hashTable[x] = false;
+		}
+	}
+}
+
+int main() {
+	n = 4;
+	generateP(1);
+
+	return 0;
+}
